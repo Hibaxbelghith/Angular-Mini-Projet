@@ -1,0 +1,15 @@
+<div class="container mt-4">
+    <!-- Liste des produits -->
+    <div class="row">
+      <div class="col-md-4 d-flex align-items-stretch mb-4" *ngFor="let product of list">
+        <div class="card w-100">
+          <img [src]="product.image" [alt]="product.name" class="card-img-top img-fluid">
+          <div class="card-body text-center">
+            <h3 class="card-title">{{ product.name }}</h3>
+            <h4 class="card-text">{{ product.price | currency:'EUR' }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

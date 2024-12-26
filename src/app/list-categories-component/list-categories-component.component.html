@@ -1,0 +1,27 @@
+<div class="container mt-4">
+        <!-- Barre de recherche -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <label for="search" class="form-label">Recherchez une catégorie :</label>
+            <input [(ngModel)]="titre" id="search" class="form-control" placeholder="Entrez un mot-clé...">
+          </div>
+        </div>
+      
+        <!-- Liste des catégories -->
+        <div class="row">
+          <div *ngFor="let c of categories | contains:titre" class="col-md-4 d-flex align-items-stretch mb-4">
+            <div class="card w-100">
+              <img [src]="c.image" (click)="f(c.description)" [alt]="c.title" class="card-img-top img-fluid">
+              <div class="card-body text-center">
+                <h3 class="card-title" appHighlight>{{ c.title | uppercase }}</h3>
+                <h4 class="card-text">{{ c.prix | number: '1.2-2' | currency:'EUR' }}</h4>
+                <button [routerLink]="['/products', c.id]" *ngIf="c.available" class="btn btn-primary">Voir produits</button>
+                <button [routerLink]="['/products']" [queryParams]="{id:c.id}" [hidden]="!c.available" class="btn btn-info">Voir produits 2</button>
+                <a [routerLink]="['category',c.id]">Voir détails</a>
+                <span *ngIf="!c.available" class="text-danger">Catégorie non dispo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      

@@ -1,0 +1,36 @@
+<nav [class]="Admin ? 'navbar navbar-expand-lg navbar-light bg-light'
+ : 'navbar navbar-expand-lg navbar-dark bg-dark' "> 
+  <!--expression ts : si sinon-->
+    <!-- Methode 2 lmouhem definissez attribut text-error f .ts wela estaaml isAdmin
+     <p [ngClass]="{'text-error': isError, 'text-success': !isError}">
+  Ce texte changera de style en fonction de la valeur de isError
+    </p> -->
+    <!-- SI on veut utiliser classe css personnalisé , il faut le définir dans classe de componment .css-->
+    <div class="container-fluid">
+    <a class="navbar-brand" href="#">TWINStore</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-
+    target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-
+    expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+    <a class="nav-link active" aria-current="page" routerLink="/home">Accueil</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Produits</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">A propos</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Profile</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Contact</a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav>
