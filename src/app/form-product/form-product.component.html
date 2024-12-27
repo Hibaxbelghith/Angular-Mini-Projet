@@ -1,0 +1,53 @@
+<form #myForm="ngForm">
+    <!-- Nom -->
+    <div class="mb-3">
+      <label for="namep" class="form-label">Nom :</label>
+      <input required value="test" [(ngModel)]="p.name" name="namep" #n="ngModel" class="form-control">
+      <div *ngIf="n.invalid && n.touched" class="text-danger">
+        Nom obligatoire
+      </div>
+      <div>
+        {{n}} ** {{ n.name }} ** {{n.value}} ** 
+        valid:{{n.valid}} ** invalid: {{n.invalid}}
+        <br>
+        touched: {{n.touched}} untouched: {{n.untouched}}
+        <br>
+        dirty:{{n.dirty}} pristine: {{n.pristine}}
+        <br>
+        errors: {{n.errors}}
+      </div>
+    </div>
+  
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description :</label>
+      <textarea pattern="[a-zA-Z]*" minlength="5" name="description" required [(ngModel)]="p.description" #desc="ngModel" class="form-control"></textarea>
+      <div *ngIf="desc.errors">
+        <div *ngIf="desc.errors['required']" class="text-danger">Champ obligatoire</div>
+        <div *ngIf="desc.errors['minlength']" class="text-warning">
+          Minimum {{desc.errors['minlength']['requiredLength']}} caractères alors que vous avez écrit {{desc.errors['minlength']['actualLength']}}
+        </div>
+        <div *ngIf="desc.errors['pattern']" class="text-info">Uniquement des lettres</div>
+      </div>
+    </div>
+  
+    <!-- Prix -->
+    <div class="mb-3">
+      <label for="price" class="form-label">Prix :</label>
+      <input required pattern="^\d+(\.\d+)?$" name="price" [(ngModel)]="p.price" #priceRef="ngModel" class="form-control">
+      <div *ngIf="priceRef.invalid" class="text-danger">Prix obligatoire</div>
+      <div *ngIf="priceRef.errors">
+        <div *ngIf="priceRef.errors['pattern']" class="text-info">Uniquement des chiffres & points</div>
+      </div>
+    </div>
+  
+    <!-- Bouton Submit -->
+    <button [disabled]="myForm.invalid" class="btn btn-primary mt-2" (click)="addProduct()">Ajouter</button>
+
+    <div>
+      Form valid: {{ myForm.valid }}<br>
+      Form invalid: {{ myForm.invalid }}
+    </div>
+  </form>
+  
+

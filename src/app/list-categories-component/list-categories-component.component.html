@@ -15,10 +15,12 @@
               <div class="card-body text-center">
                 <h3 class="card-title" appHighlight>{{ c.title | uppercase }}</h3>
                 <h4 class="card-text">{{ c.prix | number: '1.2-2' | currency:'EUR' }}</h4>
-                <button [routerLink]="['/products', c.id]" *ngIf="c.available" class="btn btn-primary">Voir produits</button>
-                <button [routerLink]="['/products']" [queryParams]="{id:c.id}" [hidden]="!c.available" class="btn btn-info">Voir produits 2</button>
-                <a [routerLink]="['category',c.id]">Voir détails</a>
-                <span *ngIf="!c.available" class="text-danger">Catégorie non dispo</span>
+                <div class="d-flex justify-content-between">
+                  <button [routerLink]="['/products', c.id]" *ngIf="c.available" class="btn btn-primary">Voir produits</button>
+                  <button [routerLink]="['/products']" [queryParams]="{id:c.id}" [hidden]="!c.available" class="btn btn-info">Voir produits 2</button>
+                  <a [routerLink]="['category', c.id]" class="btn btn-link">Voir détails</a>
+                </div>
+                <span *ngIf="!c.available" class="text-danger mt-2">Catégorie non dispo</span>
               </div>
             </div>
           </div>
