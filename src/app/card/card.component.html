@@ -1,0 +1,18 @@
+<!--composant fils-->
+<div class="card w-100">
+  <img [src]="image" (click)="f(description)" [alt]="title" class="card-img-top img-fluid">
+  <div class="card-body text-center">
+      <h3 class="card-title" appHighlight>{{ title | uppercase }}</h3>
+      <h4 class="card-text">{{ prix | number: '1.2-2' | currency:'EUR' }}</h4>
+      <!-- Produits via query param et pathparam  -->
+      <div class="d-flex gap-2 justify-content-center">
+          <button [routerLink]="['/products', id]" *ngIf="available" class="btn btn-primary btn-sm">Voir produits</button>
+          <button [routerLink]="['/products']" [queryParams]="{id:id}" [hidden]="!available" class="btn btn-info btn-sm">Produits 2</button>
+          <button class="btn btn-success btn-sm" (click)="addToShortList()"> {{btn}}</button>
+      </div>
+      <!-- child route-->
+      <div class="mt-2">
+          <a [routerLink]="['category', id]" class="btn btn-link btn-sm">Voir détails</a>
+      </div>
+  </div>
+</div>

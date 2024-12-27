@@ -7,7 +7,8 @@
           </div>
         </div>
       
-        <!-- Liste des catégories -->
+        <!--
+        Liste des catégories 
         <div class="row">
           <div *ngFor="let c of categories | contains:titre" class="col-md-4 d-flex align-items-stretch mb-4">
             <div class="card w-100">
@@ -25,5 +26,35 @@
             </div>
           </div>
         </div>
-      </div>
+        -->
+
+        <div class="row">
+          <div *ngFor="let c of categories" class="col-md-4 d-flex align-items-stretch mb-4">
+
+            <app-card 
+              [id]="c.id"
+              [title]="c.title"
+              [image]="c.image"
+              [prix]="c.prix"
+              [description]="c.description"
+              [available]="c.available"
+              [category]="c"
+              (add)="addToShortList($event)">
+            </app-card>
+
+          </div>
+
+
+
+          <h2>Shortlist</h2>
+          <ul>
+            <li *ngFor="let c of shortList">
+              category id : {{c.id}} , User id : {{c.idUser}}
+            </li>
+          </ul>
+
+
+
+
+</div>
       

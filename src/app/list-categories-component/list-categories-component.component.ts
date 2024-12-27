@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, QueryList } from '@angular/core';
 import { Category } from '../models/category';
-
+import { shortList } from '../models/shortList';
+import { ViewChildren } from '@angular/core';
+import { CardComponent } from './../card/card.component';
 @Component({
   selector: 'app-list-categories-component',
   templateUrl: './list-categories-component.component.html',
@@ -30,4 +32,39 @@ export class ListCategoriesComponentComponent {
     }
 
     titre : string = " ";
+
+    shortList : shortList[] = []; //stocke les catégories ajoutées à la shortlist a partir de fild card
+
+    addToShortList(elt : shortList){
+      // la méthode .some() de JavaScript pour vérifier si un élément spécifique existe déjà dans un tableau (pour le même utilisateur)
+    const exists = this.shortList.some( 
+      (item) => item.idElement === elt.idElement && item.idUser === elt.idUser
+    );
+
+    if (!exists) { // Si l'élément n'existe pas encore, on l'ajoute à la shortList
+      this.shortList.push(elt);
+      console.log('Catégorie ajoutée à la shortlist:', elt);
+    } else { // Sinon, afficher un message indiquant que l'élément existe déjà
+      console.log('Cette catégorie est déjà dans la shortlist pour cet utilisateur.');
+    }
+    }
+
+    //Question 8 : @ViewChildren pour accéder aux composants fils 
+      // Récupère toutes les instances de CardComponent dans le parent dans une liste (QueryList)
+      @ViewChildren(CardComponent) cardComponents!: QueryList<CardComponent>;
+      
+      ngAfterViewInit(): void {
+        this.cardComponents.forEach((card, index) => {
+          card.btn = `Ajouter ${this.categories[index].title} au shortlist`;
+        });
+  }
+  /*
+        @ViewChildren(CardComponent) children: QueryList<CardComponent>;
+        ngAfterViewInit() {
+          this.children.forEach(child => {
+            child.btn='Voir produits';
+          })}
+
+          */
+
 }
