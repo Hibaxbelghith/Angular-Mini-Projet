@@ -16,7 +16,8 @@ import { DetailsCategoryComponent } from './details-category/details-category.co
 import { FormProductComponent } from './form-product/form-product.component';
 import { ReactiveFormProductComponent } from './reactive-form-product/reactive-form-product.component';
 import { CardComponent } from './card/card.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AddCategoryComponent } from './add-category/add-category.component';
 @NgModule({
   declarations: [
     //composants et pipes personnalisés
@@ -33,13 +34,15 @@ import { CardComponent } from './card/card.component';
     DetailsCategoryComponent,
     FormProductComponent,
     ReactiveFormProductComponent,
-    CardComponent
+    CardComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, //pour utiliser les formulaires
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

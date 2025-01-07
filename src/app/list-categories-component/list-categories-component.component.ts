@@ -3,13 +3,16 @@ import { Category } from '../models/category';
 import { shortList } from '../models/shortList';
 import { ViewChildren } from '@angular/core';
 import { CardComponent } from './../card/card.component';
+import { CategoryService } from '../category.service';
+
 @Component({
   selector: 'app-list-categories-component',
   templateUrl: './list-categories-component.component.html',
   styleUrls: ['./list-categories-component.component.css']
 })
 export class ListCategoriesComponentComponent {
-  categories : Category[] = [
+  
+  /*categories : Category[] = [
     {"id":1,"title":"Grand électroménager",
     "image":"assets/images/categorie_electromenager.jpg", "description":"Grand électroménager",
     "available":true, "prix":150},
@@ -25,7 +28,7 @@ export class ListCategoriesComponentComponent {
     "available":true,"prix":150},
     {"id":6,"title":"Produits voiture", "image":"assets/images/produits_nettoyages.jpg",
     "description":"Produits voiture","available":false,"prix":170},
-    ]
+    ]*/
 
     f(description:string){
       alert(description);
@@ -40,7 +43,6 @@ export class ListCategoriesComponentComponent {
     const exists = this.shortList.some( 
       (item) => item.idElement === elt.idElement && item.idUser === elt.idUser
     );
-
     if (!exists) { // Si l'élément n'existe pas encore, on l'ajoute à la shortList
       this.shortList.push(elt);
       console.log('Catégorie ajoutée à la shortlist:', elt);
@@ -55,9 +57,10 @@ export class ListCategoriesComponentComponent {
       
       ngAfterViewInit(): void {
         this.cardComponents.forEach((card, index) => {
-          card.btn = `Ajouter ${this.categories[index].title} au shortlist`;
+          card.btnText = `Ajouter ${this.categories[index].title} au shortlist`;
         });
   }
+  
   /*
         @ViewChildren(CardComponent) children: QueryList<CardComponent>;
         ngAfterViewInit() {
@@ -65,6 +68,22 @@ export class ListCategoriesComponentComponent {
             child.btn='Voir produits';
           })}
 
-          */
+          
+*/
+
+      //injecter le service categoryService sous le nom de cs
+      constructor(private cs:CategoryService){}
+
+      categories : Category[]= [];
+        ngOnInit(){
+          //appel synchrone
+        //  this.categories = this.cs.getListCategories();
+        this.cs.getAllCategoriesFromBackend().subscribe(
+          res=>this.categories=res);
+        }
+
+        handleCategoryDeleted(categoryId: number) {
+          this.categories = this.categories.filter((c) => c.id !== categoryId);
+        }
 
 }

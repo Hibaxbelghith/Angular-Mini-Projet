@@ -2,6 +2,7 @@ import { Component, Input, Output } from '@angular/core';
 import { shortList } from '../models/shortList';
 import { EventEmitter } from '@angular/core';
 import { Category } from '../models/category';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-card',
@@ -17,7 +18,7 @@ export class CardComponent {
   @Input() description : string;
   @Input() available : boolean;
   @Input() prix : number;
-  btn : String = "add  to shortlist";
+  btnText : string = "ajouter au shortlist";
   @Input() category : Category;
   @Output() add = new EventEmitter<shortList>();
 
@@ -38,5 +39,21 @@ export class CardComponent {
   f(description:string){
     alert(description);
   }
+
+
+  @Output() categoryDeleted: EventEmitter<number> = new EventEmitter<number>();
+
+  constructor(private cs: CategoryService) {}
+
+  deleteCategory() {
+    this.cs.deleteCategoryFromBackend(this.category).subscribe(
+      () => {
+        alert('Catégorie supprimée avec succès');
+        this.categoryDeleted.emit(this.category.id); // Notifie le parent
+      },
+      (err) => console.error('Erreur lors de la suppression de la catégorie', err)
+    );
+  }
+
 
 }

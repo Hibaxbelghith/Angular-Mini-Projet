@@ -1,7 +1,7 @@
 export class Category{ 
-    id !: number;
+    id ?: number; // Facultatif pour permettre l'auto-génération
     title !: string;
-    image!: string;
+    image ?: string;
     description !: string;
     available !: boolean;
     prix !: number;

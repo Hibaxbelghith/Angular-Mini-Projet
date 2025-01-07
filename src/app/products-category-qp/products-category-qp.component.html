@@ -7,6 +7,7 @@
           <div class="card-body text-center">
             <h3 class="card-title">{{ product.name }}</h3>
             <h4 class="card-text">{{ product.price | currency:'EUR' }}</h4>
+            <button class="btn btn-danger mt-3" (click)="deleteProduct(product.id)">Supprimer</button>
           </div>
         </div>
       </div>

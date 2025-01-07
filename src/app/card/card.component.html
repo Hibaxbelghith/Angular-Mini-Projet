@@ -8,11 +8,14 @@
       <div class="d-flex gap-2 justify-content-center">
           <button [routerLink]="['/products', id]" *ngIf="available" class="btn btn-primary btn-sm">Voir produits</button>
           <button [routerLink]="['/products']" [queryParams]="{id:id}" [hidden]="!available" class="btn btn-info btn-sm">Produits 2</button>
-          <button class="btn btn-success btn-sm" (click)="addToShortList()"> {{btn}}</button>
+          <!-- output de card vers parent liste-->
+          <button class="btn btn-secondary btn-sm" (click)="addToShortList()"> {{btnText}}</button>
       </div>
       <!-- child route-->
-      <div class="mt-2">
-          <a [routerLink]="['category', id]" class="btn btn-link btn-sm">Voir détails</a>
+      <div class="mt-2 d-flex gap-2 justify-content-center">
+          <a [routerLink]="['details', id]" class="btn btn-link btn-sm">Voir détails</a>
+          <button class="btn btn-danger btn-sm" (click)="deleteCategory()">Supprimer</button>
+          <button [routerLink]="['/edit-category', id]" class="btn btn-warning btn-sm">Modifier</button>
       </div>
   </div>
 </div>

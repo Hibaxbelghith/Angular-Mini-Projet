@@ -1,0 +1,80 @@
+<div class="container mt-4">
+    <h2>Ajouter une catégorie</h2>
+    <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+      <!-- Champ Titre -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Titre :</label>
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          class="form-control"
+          placeholder="Entrez le titre de la catégorie"
+        />
+        <div *ngIf="title.invalid && title.touched" class="text-danger">
+          <div *ngIf="title.errors?.['required']">Le titre est obligatoire.</div>
+          <div *ngIf="title.errors?.['minlength']">
+            Le titre doit comporter au moins 3 caractères.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ Image -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL :</label>
+        <input
+          id="image"
+          type="text"
+          formControlName="image"
+          class="form-control"
+          placeholder="Entrez l'URL de l'image"
+        />
+      </div>
+  
+      <!-- Champ Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description :</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          rows="3"
+          placeholder="Entrez une description"
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="text-danger">
+          La description est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Champ Prix -->
+      <div class="mb-3">
+        <label for="price" class="form-label">Prix :</label>
+        <input
+          id="price"
+          type="number"
+          formControlName="price"
+          class="form-control"
+          placeholder="Entrez le prix de la catégorie"
+        />
+        <div *ngIf="price.invalid && price.touched" class="text-danger">
+          <div *ngIf="price.errors?.['required']">Le prix est obligatoire.</div>
+          <div *ngIf="price.errors?.['min']">Le prix doit être supérieur ou égal à 0.</div>
+        </div>
+      </div>
+  
+      <!-- Champ Disponibilité -->
+      <div class="mb-3">
+        <label for="available" class="form-label">Disponible :</label>
+        <select id="available" formControlName="available" class="form-select">
+          <option [value]="true">Oui</option>
+          <option [value]="false">Non</option>
+        </select>
+      </div>
+  
+      <!-- Bouton Enregistrer -->
+      <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">
+        Enregistrer
+      </button>
+    </form>
+  </div>
+  

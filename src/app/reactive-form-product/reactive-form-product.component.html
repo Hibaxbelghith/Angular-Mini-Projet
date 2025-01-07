@@ -9,7 +9,7 @@
    description obligatoire
     </div>
     price :  <input formControlName="pricep"> <br>
-   <button [disabled]="myForm.invalid">Save</button>
+   <button [disabled]="myForm.invalid" (click)="saveProduct()">Save</button>
    </form>
    {{myForm.get('namep').value}}
    <input [formControl]="nametest">

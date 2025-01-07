@@ -6,6 +6,9 @@
             <input [(ngModel)]="titre" id="search" class="form-control" placeholder="Entrez un mot-clé...">
           </div>
         </div>
+
+        <a [routerLink]="['/add-category']" class="btn btn-success mb-3">Ajouter une catégorie</a>
+
       
         <!--
         Liste des catégories 
@@ -39,7 +42,8 @@
               [description]="c.description"
               [available]="c.available"
               [category]="c"
-              (add)="addToShortList($event)">
+              (add)="addToShortList($event)"
+              (categoryDeleted)="handleCategoryDeleted($event)">
             </app-card>
 
           </div>
